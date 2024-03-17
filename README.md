@@ -1,7 +1,9 @@
 # Recruiter Tool - A PERN Stack Application
 
 
-This is a Recruiter Tool application using a blend of HTML, CSS and React.js for the frontend. The backend employes Node.js and Express.js, with PostgreSQL serving as the database. The application boasts a robust authentication system, facilitating user registration and login through the utilization of JSON Web Tokens and cookies. Furthermore, it features a section dedicated to candidate information, including their name, email, phone number, skills, status and expected salary. Recruiters can add new candidates and edit the details of existing ones.
+This is a Recruiter Tool application using a blend of HTML, Tailwind CSS and React.js for the frontend. The backend employes Typescript, Node.js and Express.js, with PostgreSQL serving as the database. The application boasts a robust authentication system, facilitating user registration and login through the utilization of JSON Web Tokens and cookies. Furthermore, it features a section dedicated to candidate information, including their name, email, phone number, skills, status and expected salary. Recruiters can add new candidates and edit the details of existing ones.
+
+Link to the website - https://recruiting-tool.vercel.app/
 
 
 ## Clone the repository
