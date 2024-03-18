@@ -5,11 +5,16 @@ import bcrypt from 'bcryptjs';
 import { catchAsync } from '../utils/catchAsync';
 
 const register = catchAsync(async (req: { body: RegisterInput }, res: Response) => {
-    const { email, password1 } = req.body;
-    console.log(req.body);
+    const { email, password1, password2 } = req.body;
 
-    if (email === null || email === undefined || password1 === null || password1 === null) {
+    if (email === null || email === undefined || 
+        password1 === null || password1 === null ||
+        password2 === null || password2 === null) {
         return res.status(422).json({ error: "Please fill all the fields" });
+    }
+
+    if(password1 !== password2) {
+        return res.status(422).json({ error: "Passwords do not match" });
     }
 
     try {

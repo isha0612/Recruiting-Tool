@@ -4,7 +4,9 @@ import { Request, Response } from "express";
 const getCandidates = catchAsync(async (req: Request, res: Response) => {
     try {
         const candidates = await prisma?.candidate.findMany();
-        console.log("candidates ", candidates);
+        if (candidates === null || candidates === undefined) {
+            return res.status(500).json({ error: "There are no candidates currently" });
+        }
         return res.status(200).send(candidates);
     }
     catch (err) {
@@ -54,7 +56,8 @@ const postCandidates = catchAsync(async (req: Request, res: Response) => {
         return res.status(201).json({ message: "Candidate Added successfully" });
     }
     catch (err) {
-        return res.status(422).json({ err });
+        console.log(err);
+        return res.status(422).json("Internal server error");
     }
 });
 
@@ -102,7 +105,7 @@ const editCandidates = catchAsync(async (req: Request, res: Response) => {
         if (candidate === null || candidate === undefined) {
             return res.status(500).json({ error: "Error updating candidate" });
         }
-        
+
         return res.status(201).json({ message: "Candidate Updated successfully" });
     } catch (err) {
         console.log(err);

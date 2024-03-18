@@ -8,14 +8,18 @@ const Authenticate = catchAsync(async (req: Request, res: Response, next: NextFu
         if (req.headers.authorization === null || req.headers.authorization === undefined) {
             return res.status(401).json({ error: "Unauthorized" });
         }
-        const token = req.headers.authorization.split(" ")[1];
 
+        const token = req.headers.authorization.split(" ")[1];
         const verifyToken = verifyAuthToken(token) as jwt.JwtPayload;
+
+        if(verifyToken === null || verifyToken === undefined) {
+            return res.status(401).json({ error: "Unauthorized" });
+        }
 
         const rootUser = await prisma?.user.findUnique({ where: { id: parseInt(verifyToken.id) } });
 
         if (rootUser === null || rootUser === undefined) {
-            throw new Error("User not found");
+            return res.status(401).json({ error: "User not found" });
         }
 
         next();

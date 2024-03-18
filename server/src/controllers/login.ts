@@ -23,11 +23,9 @@ const login = catchAsync(async (req: { body: LoginInput }, res: Response) => {
         if (!isMatch) {
             return res.status(422).json({ error: "Invalid credentials" });
         }
-        else {
-            const token = generateAuthToken({ id: userExist.id });
-            console.log("User logged in successfully");
-            return res.status(201).json({ message: "User logged in successfully" , jwtoken: token});
-        }
+
+        const token = generateAuthToken({ id: userExist.id });
+        return res.status(201).json({ message: "User logged in successfully", jwtoken: token });
     }
     catch (err) {
         console.log(err);
