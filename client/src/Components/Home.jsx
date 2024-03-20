@@ -25,7 +25,7 @@ export default function Home() {
 
     return (
         <>
-            <Navbar />
+            <Navbar page="" />
             {data === undefined || data.length === 0 ?
                 <div className="text-center min-h-[600px] flex justify-center items-center">
                     <div role="status">

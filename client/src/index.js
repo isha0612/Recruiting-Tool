@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { UserProvider } from './Context/index';
+import { UserProvider } from './Context/userContext';
+import { DarkModeProvider } from './Context/darkModeContext';
 import './index.css';
 import App from './App';
 
@@ -8,7 +9,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserProvider>
-      <App />
+      <DarkModeProvider>
+        <App />
+      </DarkModeProvider>
     </UserProvider>
   </React.StrictMode>
 );

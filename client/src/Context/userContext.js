@@ -1,15 +1,15 @@
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const UserContext = createContext();
+
+export const useUser = () =>  useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     if(localStorage.getItem('jwtoken')) {
       return true;
     }
-    else {
-      return false;
-    }
+    return false;
   });
 
   return (
@@ -17,8 +17,4 @@ export const UserProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-};
-
-export const useUser = () => {
-  return useContext(UserContext);
 };
