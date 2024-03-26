@@ -7,16 +7,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const src = "https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp";
 
+interface UserDetails {
+    setIsAuthenticated: (value: boolean) => void; 
+}
+
 export default function Register() {
     const navigate = useNavigate();
-    const { setIsAuthenticated } = useUser();
+    const { setIsAuthenticated } = useUser() as UserDetails;
     const [userDetails, setUserDetails] = useState({
         email: "",
         password1: "",
         password2: ""
     });
 
-    function inputChange(e) {
+    function inputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target;
         setUserDetails(prevUserDetails => {
             return {
@@ -26,7 +30,7 @@ export default function Register() {
         });
     }
 
-    async function handleForm(e) {
+    async function handleForm(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (userDetails.password1 !== userDetails.password2) {
             toast("Passwords do not match. Try again!", { type: "warning", autoClose: 1000 });
@@ -52,7 +56,7 @@ export default function Register() {
                 });
             }
         }
-        catch (err) {
+        catch (err: Error | any) {
             toast(err.response.data.error, { type: "error", autoClose: 1000 });
             setUserDetails(() => {
                 return {
@@ -77,10 +81,10 @@ export default function Register() {
                         type="email" placeholder="Email Address" value={userDetails.email}
                         onChange={inputChange} name="email" required />
                     <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-                        type="password" placeholder="Password" value={userDetails.password1} minLength="6"
+                        type="password" placeholder="Password" value={userDetails.password1} minLength={6}
                         onChange={inputChange} name="password1" required />
                     <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-                        type="password" placeholder="Confirm Password" value={userDetails.password2} minLength="6"
+                        type="password" placeholder="Confirm Password" value={userDetails.password2} minLength={6}
                         onChange={inputChange} name="password2" required />
                     <div className="text-center md:text-left">
                         <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" type="submit">Register</button>

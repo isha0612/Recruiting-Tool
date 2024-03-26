@@ -16,7 +16,7 @@ export default function Home() {
                     setData(response.data);
                 }
             }
-            catch (err) {
+            catch (err: Error | any) {
                 toast(err.response.data.error, { type: "error", autoClose: 1000 });
             }
         }
@@ -37,7 +37,7 @@ export default function Home() {
                     </div>
                 </div>
                 :
-                <div className="flex flex-wrap justify-center sm:justify-start mt-10">{data.map((d) => <Candidate data={d} key={d.id} />)}</div>
+                <div className="flex flex-wrap justify-center sm:justify-start mt-10">{data.map((d) => <Candidate data={d} />)}</div>
             }
             <ToastContainer />
         </>

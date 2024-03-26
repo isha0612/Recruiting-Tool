@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Candidate({ data }) {
+interface CandidateProps {
+    name: string;
+    email: string;
+    phone: string;
+    skills: string;
+    status: string;
+    salary: string;
+}
+
+export default function Candidate({ data }: { data: CandidateProps }) {
     const [score, setScore] = useState(0);
     const navigate = useNavigate();
 
@@ -36,7 +45,7 @@ export default function Candidate({ data }) {
             <p className="mb-3 m-2 text-sm text-gray-700 dark:text-white sm:text-base">Salary: <span className="text-blue-500">{data.salary}</span></p>
             <div className="flex justify-between items-end mb-2 sm:mb-0">
                 <span className="mb-1 m-2 font-bold uppercase text-blue-500 dark:text-white text-sm sm:text-base">Score: {score}</span>
-                <div onClick={handleEdit} className="hover:cursor-pointer inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white text-sm  g-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-base sm:px-3 py-2">
+                <div onClick={handleEdit} className="hover:cursor-pointer inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white text-sm bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-base sm:px-3 py-2">
                     Edit
                     <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />

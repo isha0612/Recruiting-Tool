@@ -7,15 +7,19 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const src = "https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp";
 
+interface UserDetails {
+    setIsAuthenticated: (value: boolean) => void;
+}
+
 export default function Login() {
     const navigate = useNavigate();
-    const { setIsAuthenticated } = useUser();
+    const { setIsAuthenticated } = useUser() as UserDetails;
     const [userDetails, setUserDetails] = useState({
         email: "",
         password: ""
     });
 
-    function inputChange(e) {
+    function inputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target;
         setUserDetails(prevUserDetails => {
             return {
@@ -25,7 +29,7 @@ export default function Login() {
         });
     }
 
-    async function handleForm(e) {
+    async function handleForm(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
             const response = await axiosInst.post("/login", userDetails);
@@ -39,7 +43,7 @@ export default function Login() {
                 });
             }
         }
-        catch (err) {
+        catch (err: Error | any) {
             toast(err.response.data.error, { type: "error", autoClose: 1000 });
             setUserDetails(() => {
                 return {
@@ -63,7 +67,7 @@ export default function Login() {
                         type="email" placeholder="Email Address" value={userDetails.email}
                         onChange={inputChange} name="email" required />
                     <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-                        type="password" placeholder="Password" value={userDetails.password} minLength="6"
+                        type="password" placeholder="Password" value={userDetails.password} minLength={6}
                         onChange={inputChange} name="password" required />
                     {/* <div className="mt-4 flex justify-between font-semibold text-sm">
                     <a className="text-blue-600 hover:text-blue-700 hover:underline hover:underline-offset-4" href="#">Forgot Password?</a>

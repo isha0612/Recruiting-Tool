@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { axiosInst } from "../utils/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -19,7 +19,7 @@ export default function AddCandidate() {
         id: data?.id ?? ""
     });
 
-    function inputChange(e) {
+    function inputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target;
         setDetails(prevUserDetails => {
             return {
@@ -29,7 +29,7 @@ export default function AddCandidate() {
         });
     }
 
-    async function handleForm(e) {
+    async function handleForm(e: FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault();
         try {
             let response;
@@ -45,7 +45,7 @@ export default function AddCandidate() {
                     }
                 });
             }
-        } catch (err) {
+        } catch (err: Error | any) {
             toast(err.response.data.error, { type: "error", autoClose: 1000 });
         }
     }
