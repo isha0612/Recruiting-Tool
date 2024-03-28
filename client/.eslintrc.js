@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    commonjs: true,
+    commonjs: false,
     es2021: true,
   },
   extends: ["prettier"],
@@ -30,6 +30,6 @@ module.exports = {
     ],
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-namespace": "off",
-    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/consistent-type-assertions": "off"
   },
 };

@@ -19,7 +19,7 @@ interface ThemeDetails {
     toggleDarkMode: () => void;
 }
 
-export default function Navbar({ page }: NavbarProps) {
+export default function Navbar({ page } : NavbarProps) {
     const navigate = useNavigate();
     const { setIsAuthenticated } = useUser() as UserDetails;
     const { isDarkMode, toggleDarkMode } = useDarkMode() as ThemeDetails;
